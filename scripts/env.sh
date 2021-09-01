@@ -5,4 +5,4 @@ export CLASSPATH=${CLASSPATH}:${CLOUDERA_JAR_PATH}/log4j-1.2-api-2.13.3.jar:${CL
 export CLASSPATH=${CLASSPATH}:${CLOUDERA_JAR_PATH}/commons-lang-2.6.jar:${CLOUDERA_JAR_PATH}/woodstox-core-5.0.3.jar
 export CLASSPATH=${CLASSPATH}:${CLOUDERA_JAR_PATH}/stax2-api-3.1.4.jar:${CLOUDERA_JAR_PATH}/commons-collections-3.2.2.jar
 export CLASSPATH=${CLASSPATH}:${CLOUDERA_JAR_PATH}/commons-logging-1.2.jar:${CLOUDERA_JAR_PATH}/protobuf-java-3.12.0.jar
-export CLASSPATH=${CLASSPATH}:${CLOUDERA_JAR_PATH}/re2j-1.2.jar:.
+export CLASSPATH=${CLASSPATH}:${CLOUDERA_JAR_PATH}/re2j-1.2.jar:../classes/.
