@@ -1,1 +1,1 @@
-javac -cp $CLASSPATH -d ../classes ../src/FileCount.java
+javac -cp $CLASSPATH -d ../classes ../src/HdfsFileTest.java
