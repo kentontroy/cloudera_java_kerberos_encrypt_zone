@@ -1,1 +1,1 @@
-java -cp $CLASSPATH FileCount
+java -cp $CLASSPATH HdfsFileTest
