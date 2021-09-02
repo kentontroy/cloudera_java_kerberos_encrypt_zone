@@ -8,9 +8,27 @@ https://docs.cloudera.com/cdp-private-cloud-base/7.1.7/security-encrypting-data-
 $ sudo useradd -g root key_admin
 $ sudo passwd key_admin
 
+$ sudo groupadd trusted_app_1 
+$ sudo useradd -g trusted_app_1 trusted_app_1
+$ sudo passwd trusted_app_1
+
+$ sudo groupadd trusted_app_2
+$ sudo useradd -g trusted_app_2 trusted_app_2
+$ sudo passwd trusted_app_2
+
 $ sudo kadmin.local -q "addprinc -randkey key_admin/$(hostname -f)@CLOUDERA.COM"
 $ sudo kadmin.local -q "xst -k key_admin.keytab key_admin/$(hostname -f)@CLOUDERA.COM"
 $ sudo mv key_admin.keytab /etc/security/keytabs
+
+$ sudo kadmin.local -q "addprinc -randkey trusted_app_1/$(hostname -f)@CLOUDERA.COM"
+$ sudo kadmin.local -q "xst -k trusted_app_1.keytab trusted_app_1/$(hostname -f)@CLOUDERA.COM"
+$ sudo mv trusted_app_1.keytab /etc/security/keytabs
+$ sudo chmod 655 /etc/security/keytabs/trusted_app_1.keytab
+
+$ sudo kadmin.local -q "addprinc -randkey trusted_app_2/$(hostname -f)@CLOUDERA.COM"
+$ sudo kadmin.local -q "xst -k trusted_app_2.keytab trusted_app_2/$(hostname -f)@CLOUDERA.COM"
+$ sudo mv trusted_app_2.keytab /etc/security/keytabs
+$ sudo chmod 655 /etc/security/keytabs/trusted_app_2.keytab
 
 $ sudo kinit -kt /etc/security/keytabs/key_admin.keytab key_admin/$(hostname -f)@CLOUDERA.COM
 
@@ -33,8 +51,20 @@ org.apache.hadoop.crypto.key.kms.LoadBalancingKMSClientProvider@a2431d0 has been
 $ sudo hadoop key create mykey2
 
 $ sudo kinit -kt /var/run/cloudera-scm-agent/process/731-hdfs-NAMENODE/hdfs.keytab hdfs/$(hostname -f)@CLOUDERA.COM
+
 $ sudo hadoop fs -mkdir /tmp/zone1
+$ sudo hadoop fs -chown trusted_app_1:trusted_app_1 /tmp/zone1
+$ sudo hadoop fs -chmod 777 /tmp/zone1
+
+sudo hadoop fs -mkdir -p /kms_test_zone_1
+sudo hadoop fs -chown trusted_app_1:trusted_app_1 /kms_test_zone_1
+sudo hadoop fs -chmod 777 /kms_test_zone_1
+sudo hdfs crypto -createZone -keyName mykey1 -path /kms_test_zone_1
+
 $ sudo hadoop fs -mkdir /tmp/zone2
+$ sudo hadoop fs -chown trusted_app_2:trusted_app_2 /tmp/zone1
+$ sudo hadoop fs -chmod 755 /tmp/zone2
+
 $ sudo hdfs crypto -createZone -keyName mykey1 -path /tmp/zone1
 Added encryption zone /tmp/zone1
 $ sudo hdfs crypto -createZone -keyName mykey2 -path /tmp/zone2
