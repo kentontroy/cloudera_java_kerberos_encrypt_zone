@@ -31,6 +31,25 @@ $ sudo kadmin.local -q "xst -k trusted_app_2.keytab trusted_app_2/$(hostname -f)
 $ sudo mv trusted_app_2.keytab /etc/security/keytabs
 $ sudo chmod 655 /etc/security/keytabs/trusted_app_2.keytab
 
+$ sudo kadmin.local -q list_principals
+
+$ sudo ktutil
+ktutil:  read_kt /etc/security/keytabs/trusted_app_1.keytab
+ktutil:  read_kt /etc/security/keytabs/trusted_app_2.keytab
+ktutil:  list
+slot KVNO Principal
+---- ---- ---------------------------------------------------------------------
+   1    2 trusted_app_1/cdp.cloudera.com@CLOUDERA.COM
+   2    2 trusted_app_1/cdp.cloudera.com@CLOUDERA.COM
+   3    2 trusted_app_1/cdp.cloudera.com@CLOUDERA.COM
+   4    2 trusted_app_2/cdp.cloudera.com@CLOUDERA.COM
+   5    2 trusted_app_2/cdp.cloudera.com@CLOUDERA.COM
+   6    2 trusted_app_2/cdp.cloudera.com@CLOUDERA.COM
+ktutil:  write_kt merged_trusted_apps_1_2.keytab
+ktutil:  quit
+
+$ sudo chmod 655 /etc/security/keytabs/merged_trusted_apps_1_2.keytab
+
 $ sudo kinit -kt /etc/security/keytabs/key_admin.keytab key_admin/$(hostname -f)@CLOUDERA.COM
 
 For testing, configure the centos user as the key_admin user.
