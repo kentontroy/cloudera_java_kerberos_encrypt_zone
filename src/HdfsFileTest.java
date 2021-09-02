@@ -4,7 +4,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.*;
 import org.apache.hadoop.security.*;
 
-class FileCount {
+class HdfsFileTest {
   public static void main(final String[] args) throws IOException, FileNotFoundException, InterruptedException {
     String principal = "joe_analyst/cdp.cloudera.com@CLOUDERA.COM";
     String keytab = "/etc/security/keytabs/joe_analyst.keytab";
