@@ -1,31 +1,39 @@
-import java.io.*;
 import java.security.PrivilegedExceptionAction;
+import java.util.Collection;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.*;
 import org.apache.hadoop.security.*;
+import org.apache.hadoop.security.token.Token;
+import org.apache.hadoop.security.token.TokenIdentifier;
 
-class HdfsFileTest {
-  public static void main(final String[] args) throws IOException, FileNotFoundException, InterruptedException {
-    String principal = "joe_analyst/cdp.cloudera.com@CLOUDERA.COM";
-    String keytab = "/etc/security/keytabs/joe_analyst.keytab";
-
+public class HdfsFileTest {
+  public static void main(final String[] args) throws Exception {
     Configuration conf = new Configuration();
     conf.set("fs.defaultFS", "hdfs://cdp.cloudera.com:8020");
     conf.set("hadoop.security.authentication", "kerberos");
     conf.set("hadoop.security.authorization", "true");
 
     UserGroupInformation.setConfiguration(conf);
-    UserGroupInformation ugi = UserGroupInformation.loginUserFromKeytabAndReturnUGI(principal, keytab);
 
+    String keytab = "/etc/security/keytabs/merged_trusted_apps_1_2.keytab";
+
+    UserGroupInformation ugi = UserGroupInformation.loginUserFromKeytabAndReturnUGI( "trusted_app_1/cdp.cloudera.com@CLOUDERA.COM", keytab);
     ugi.doAs(new PrivilegedExceptionAction() {
       public Void run() throws Exception {
         FileSystem fs = FileSystem.get(conf);
-        String dirName = "/";
-        FileStatus[] status = fs.listStatus(new Path(dirName));
-        System.out.println("File Count: " + status.length);
-
+        fs.create(new Path("/kms_test_zone_1/test3"));
         return null;
       }
-   });
+    });
+
+    UserGroupInformation ugi2 = UserGroupInformation.getUGIFromTicketCache("/tmp/cache-trusted_app_2", "trusted_app_2/cdp.cloudera.com@CLOUDERA.COM");
+    ugi2.doAs(new PrivilegedExceptionAction() {
+      public Void run() throws Exception {
+        FileSystem fs = FileSystem.get(conf);
+        fs.create(new Path("/kms_test_zone_2/test3"));
+        return null;
+      }
+    });
   }
 }
+~             
