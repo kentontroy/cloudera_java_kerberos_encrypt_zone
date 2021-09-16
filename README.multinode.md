@@ -1,4 +1,5 @@
-
+## Test on multi-node cluster created by Cloudera Support team
+```
 # Accidentally, executed the below on CM node
 # It lacks a process directory so have to ssh elsewhere later
 # ssh -u root 172.31.113.31
@@ -49,6 +50,26 @@ ssh -u root 172.31.113.18
 # hadoop fs -chmod 777 /kms_test_zone_2
 # hdfs crypto -createZone -keyName mykey2 -path /kms_test_zone_2
 Added encryption zone /kms_test_zone_2
+```
+```
+# yum install java-1.8.0-openjdk-devel
 
+# pwd
+/root/troubleshooting
+
+# yum install git
+# git clone https://github.com/kentontroy/cloudera_java_kerberos_encrypt_zone
+
+# cd cloudera_kerberos_int/scripts
+# . env.sh
+# ./compile.sh
+
+If compile fails, use script to search Cloudera jar directory
+# ./search.sh -q "com/google/common/base/Preconditions"
+Searching for com/google/common/base/Preconditions
+
+Copy keytabs created on the CM node
+# mkdir /etc/security/keytabs; scp root@dturnau-802475-1:/etc/security/keytabs/* /etc/security/keytabs
+```
 
 
