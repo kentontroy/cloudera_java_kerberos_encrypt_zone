@@ -1,0 +1,12 @@
+export CLOUDERA_JAR_PATH=/opt/cloudera/parcels/CDH/jars
+export CLASSPATH=`(printf %s: ${CLOUDERA_JAR_PATH}/hadoop*.jar)`:${CLOUDERA_JAR_PATH}/commons-configuration2-2.1.1.jar
+export CLASSPATH=${CLASSPATH}:${CLOUDERA_JAR_PATH}/slf4j-api-1.7.25.jar:${CLOUDERA_JAR_PATH}/slf4j-simple-1.7.25.jar
+export CLASSPATH=${CLASSPATH}:${CLOUDERA_JAR_PATH}/log4j-1.2-api-2.13.3.jar:${CLOUDERA_JAR_PATH}/guava-20.0.jar
+export CLASSPATH=${CLASSPATH}:${CLOUDERA_JAR_PATH}/commons-lang-2.6.jar:${CLOUDERA_JAR_PATH}/woodstox-core-5.0.3.jar
+export CLASSPATH=${CLASSPATH}:${CLOUDERA_JAR_PATH}/stax2-api-3.1.4.jar:${CLOUDERA_JAR_PATH}/commons-collections-3.2.2.jar
+export CLASSPATH=${CLASSPATH}:${CLOUDERA_JAR_PATH}/commons-logging-1.2.jar:${CLOUDERA_JAR_PATH}/protobuf-java-3.12.0.jar
+export CLASSPATH=${CLASSPATH}:${CLOUDERA_JAR_PATH}/re2j-1.1.jar:${CLOUDERA_JAR_PATH}/failureaccess-1.0.1.jar
+export CLASSPATH=${CLASSPATH}:${CLOUDERA_JAR_PATH}/commons-codec-1.9.jar:${CLOUDERA_JAR_PATH}/httpclient-4.5.3.jar
+export CLASSPATH=${CLASSPATH}:${CLOUDERA_JAR_PATH}/httpcore-4.4.6.jar:${CLOUDERA_JAR_PATH}/jackson-core-2.9.8.jar
+export CLASSPATH=${CLASSPATH}:${CLOUDERA_JAR_PATH}/htrace-core4-4.2.0-incubating.jar:${CLOUDERA_JAR_PATH}/protobuf-java-3.1.0.jar
+export CLASSPATH=${CLASSPATH}:${CLOUDERA_JAR_PATH}/jackson-annotations-2.9.8.jar:${CLOUDERA_JAR_PATH}/jackson-databind-2.9.8.jar:../classes/:.
