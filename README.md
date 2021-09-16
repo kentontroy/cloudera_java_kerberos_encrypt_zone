@@ -1,5 +1,4 @@
-# Test integration of Java and Kerberos, cloudera_solix_kerberos_int
-
+# Error when writing to multiple encryption zones w/ different principals when using the same GSS Context
 ```
 Instructions to install Java (file-based) Keystore, not recommended for production, doesn't maintain redundant key copies
 
