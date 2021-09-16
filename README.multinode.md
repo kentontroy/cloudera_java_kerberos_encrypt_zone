@@ -60,9 +60,10 @@ Added encryption zone /kms_test_zone_2
 # yum install git
 # git clone https://github.com/kentontroy/cloudera_java_kerberos_encrypt_zone
 
-# cd cloudera_kerberos_int/scripts
-# . env.sh
+# cd cloudera_java_kerberos_encrypt_zone/scripts
+# . env-cdh-6.2.sh
 # ./compile.sh
+# ./run.sh
 
 If compile fails, use script to search Cloudera jar directory
 # ./search.sh -q "com/google/common/base/Preconditions"
@@ -70,6 +71,7 @@ Searching for com/google/common/base/Preconditions
 
 Copy keytabs created on the CM node
 # mkdir /etc/security/keytabs; scp root@dturnau-802475-1:/etc/security/keytabs/* /etc/security/keytabs
+
 ```
 
 
