@@ -88,7 +88,7 @@ $ sudo hdfs crypto -createZone -keyName mykey2 -path /kms_test_zone_2
 Assumes that a JDK is installed and running CDP 7.1.7 
 See other notes for testing on CDH 6.2
 
-# . env.sh
+# . env-cdp-7.1.7.sh.sh
 # ./compile.sh
 # ./run.sh
 
