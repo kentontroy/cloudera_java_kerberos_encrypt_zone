@@ -31,7 +31,9 @@ $ sudo mv trusted_app_2.keytab /etc/security/keytabs
 $ sudo chmod 655 /etc/security/keytabs/trusted_app_2.keytab
 
 $ sudo kadmin.local -q list_principals
-
+```
+## Merge the keytabs
+```
 $ sudo ktutil
 ktutil:  read_kt /etc/security/keytabs/trusted_app_1.keytab
 ktutil:  read_kt /etc/security/keytabs/trusted_app_2.keytab
